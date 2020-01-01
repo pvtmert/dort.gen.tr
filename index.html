@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script src="p5.min.js"></script>
+	<script src="sketch.js"></script>
+	<script>
+		window.onload = function() {
+			if(window.location.hostname === "localhost") {
+				new WebSocket(`ws://${window.location.host}`).onmessage = function() {
+					return window.location.reload(true)
+				}
+			}
+			let canvas = document.querySelector("canvas")
+			let context = canvas.getContext("2d");
+			return
+		}
+	</script>
+</html>

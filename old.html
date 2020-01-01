@@ -1,0 +1,32 @@
+<body>
+	<main>
+		<canvas></canvas>
+	</main>
+</body>
+<style>
+	canvas {
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		width: 100%;
+		height: 100%;
+		margin: 0;
+		padding: 0;
+		display: block;
+		position: fixed;
+		background: black;
+	}
+</style>
+<script type="text/javascript">
+	window.onload = function() {
+		if(window.location.hostname === "localhost") {
+			new WebSocket(`ws://${window.location.host}`).onmessage = function() {
+				return window.location.reload(true)
+			}
+		}
+		let canvas = document.querySelector("canvas")
+		let context = canvas.getContext("2d");
+		return
+	}
+</script>
