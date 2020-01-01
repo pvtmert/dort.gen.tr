@@ -52,7 +52,7 @@ function mousePressed() {
 	return
 }
 
-function mouseReleased() {
+function mouseReleased(event) {
 	let rect = getRect()
 	if(rect.w > limits[0] && rect.h > limits[1]) {
 		rects.push(rect)
@@ -60,7 +60,7 @@ function mouseReleased() {
 	return
 }
 
-function mouseClicked() {
+function mouseClicked(event) {
 	let matches = rects.filter(r => (
 		(r.x < mouseX && mouseX < (r.x + r.w))
 		&&
@@ -70,7 +70,7 @@ function mouseClicked() {
 	return
 }
 
-function mouseDragged() {
+function mouseDragged(event) {
 	current.min.x = mouseX < current.min.x ? mouseX : current.min.x
 	current.min.y = mouseY < current.min.y ? mouseY : current.min.y
 	current.max.x = mouseX > current.max.x ? mouseX : current.max.x
@@ -82,4 +82,29 @@ function mouseDragged() {
 function windowResized() {
 	resizeCanvas(windowWidth, windowHeight)
 	return
+}
+
+let lastTouchTime = 0
+
+function touchStarted(event) {
+	lastTouchTime = millis()
+	mousePressed(event)
+	return false
+}
+
+function touchEnded(event) {
+	mouseReleased(event)
+	if(true
+		&& millis() - lastTouchTime < 250
+		&& abs(mouseX - pmouseX) < width/100
+		&& abs(mouseY - pmouseY) < height/100
+	) {
+		mouseClicked()
+	}
+	return false
+}
+
+function touchMoved(event) {
+	mouseDragged(event)
+	return false
 }
