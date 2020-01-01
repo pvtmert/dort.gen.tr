@@ -16,6 +16,7 @@ let limits = [ 50, 50, ]
 // example: { x: 0, y: 0, w: 0, h: 0, ... }
 
 function draw() {
+	color = (50 + abs(200 - (frameCount % 400)))
 	fill(color)
 	stroke(color)
 	background(255-color)
@@ -75,5 +76,10 @@ function mouseDragged() {
 	current.max.x = mouseX > current.max.x ? mouseX : current.max.x
 	current.max.y = mouseY > current.max.y ? mouseY : current.max.y
 	line(mouseX, mouseY, pmouseX, pmouseY)
+	return
+}
+
+function windowResized() {
+	resizeCanvas(windowWidth, windowHeight)
 	return
 }
